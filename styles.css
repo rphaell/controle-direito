@@ -1863,13 +1863,151 @@ html {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-    
+    .nav-menu.active {
+    display: flex; /* Mostra o menu quando ativo */
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Ajuste conforme a altura do seu header */
+    left: 0;
+    width: 100%;
+    background: var(--primary-color); /* Cor de fundo do menu mobile */
+    padding: 1rem 0;
+    box-shadow: var(--shadow-md);
+}
+
+.nav-menu.active .nav-link {
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-link {
+    max-width: 70%;
+}
+
+/* Menu mobile com transição escalonada */
+@media (max-width: 768px) {
     .nav-menu {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary-color);
+        padding: 0;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+        z-index: 999;
     }
+
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-menu .nav-link {
+        padding: 1rem 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        opacity: 0;
+        transform: translateY(-30px);
+        transition: all 0.4s ease;
+        transition-delay: 0s;
+    }
+
+    /* Transição escalonada - cada item aparece com delay */
+    .nav-menu.active .nav-link:nth-child(1) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.1s;
+    }
+
+    .nav-menu.active .nav-link:nth-child(2) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    .nav-menu.active .nav-link:nth-child(3) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.3s;
+    }
+
+    .nav-menu.active .nav-link:nth-child(4) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.4s;
+    }
+
+    .nav-menu.active .nav-link:nth-child(5) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.5s;
+    }
+
+    /* Efeito hover para os links do menu mobile */
+    .nav-menu .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--accent-color);
+    }
+
+    /* Botão CTA no menu mobile */
+    .nav-menu .cta-button {
+        margin: 1rem;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(-30px);
+        transition: all 0.4s ease;
+        transition-delay: 0s;
+    }
+
+    .nav-menu.active .cta-button {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.6s;
+    }
+}
+
+
+.hamburger {
+    
+    flex-direction: column;
+    cursor: pointer;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--white);
+    margin: 2px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* Hamburger active state - X icon */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
     
     .section-title {
         font-size: 2rem;
@@ -1954,6 +2092,23 @@ html {
         padding: 1rem 1.5rem;
         font-size: 1rem;
     }
+
+    .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: 2rem 0;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
 }
 
 /* Smooth Scrolling */
