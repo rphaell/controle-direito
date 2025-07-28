@@ -422,3 +422,25 @@ if (typeof module !== 'undefined' && module.exports) {
     };
 }
 
+
+function relocateLogoText() {
+    const logoContainer = document.querySelector('.logo');
+    const logoText = document.querySelector('.logo-text');
+
+    if (window.innerWidth <= 768) {
+        // Mover para depois da div.logo
+        if (logoContainer && logoText && logoContainer.contains(logoText)) {
+            logoContainer.parentNode.insertBefore(logoText, logoContainer.nextSibling);
+        }
+    } else {
+        // Recolocar dentro da div.logo caso esteja fora
+        if (logoContainer && logoText && !logoContainer.contains(logoText)) {
+            logoContainer.appendChild(logoText);
+        }
+    }
+}
+
+// Rodar ao carregar e ao redimensionar
+window.addEventListener('DOMContentLoaded', relocateLogoText);
+window.addEventListener('resize', relocateLogoText);
+
